@@ -34,12 +34,11 @@ public class MyConfig {
         }
         return dataSource;
     }
-
     @Bean
     public LocalSessionFactoryBean sessionFactory(){
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("org.example.configuration.entity");
+        sessionFactory.setPackagesToScan("org.example.entity");
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.dialect"
                 , "org.hibernate.dialect.PostgreSQL9Dialect");
@@ -48,13 +47,10 @@ public class MyConfig {
         sessionFactory.setHibernateProperties(hibernateProperties);
         return sessionFactory;
     }
-
     @Bean
     public HibernateTransactionManager transactionManager(){
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory().getObject());
         return transactionManager;
     }
-
-
 }
